@@ -1,13 +1,25 @@
 import React from 'react';
 
-import WalletStore from './walletStore';
+import store from './store';
 
-const wStore = {
-    walletStore: WalletStore,
+const WStore = {
+    walletStore: store.WalletStore,
 }
-const walletStoreContext = React.createContext(wStore);
+const walletStoreContext = React.createContext(WStore);
+
+const CStore = {
+    cryptoStore: store.CryptoStore,
+}
+const cryptoStoreContext = React.createContext(CStore);
+
+const BStore = {
+    balanceStore: store.BalanceStore,
+}
+const balanceStoreContext = React.createContext(BStore);
 
 
 
 export const useWalletStore = () => React.useContext(walletStoreContext);
+export const useCryptoStore = () => React.useContext(cryptoStoreContext);
+export const useBalanceStore = () => React.useContext(balanceStoreContext);
 
