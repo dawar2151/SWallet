@@ -3,6 +3,7 @@ import {
     View,
     Text
 } from 'react-native';
+import { Divider, List, ListItem } from '@ui-kitten/components';
 
 interface Props {
     name: string;
@@ -16,7 +17,10 @@ const Network: React.FC<Props> = ({
     textSize
 }): JSX.Element => (
         <View style={{ padding: 12 }}>
-            <Text style={{ fontSize: textSize }}>{name} : {sold}</Text>
+            <ListItem style={{ fontSize: textSize }}
+                title={name}
+                description={sold}
+            />
         </View>
 );
 

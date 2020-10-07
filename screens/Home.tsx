@@ -7,6 +7,7 @@ import Mnemonic from '../components/Mnemonic';
 import { useWalletStore, useCryptoStore, useBalanceStore } from '../store';
 import Network from '../components/Network';
 import { useObserver } from 'mobx-react';
+import { Divider, List, ListItem } from '@ui-kitten/components';
 
 interface Props { }
 
@@ -21,8 +22,8 @@ const Home = ({
       balanceStore.receiveState(result);
     })
   return useObserver(()=>
-    <View style={styles.container}>
-       <FlatList
+    <View>
+       <List
                     ref={listRef}
                     data={balanceStore.balances.slice()}
                     keyExtractor={(item) => item.title }

@@ -1,12 +1,14 @@
 import * as React from 'react';
-import { StyleSheet, Button } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
+import { View } from '../components/Themed';
 import Mnemonic from '../components/Mnemonic';
 import { useWalletStore } from '../store';
 import { ethers } from "ethers";
 import { useObserver } from 'mobx-react';
+import { Avatar, Button, Divider, Text } from '@ui-kitten/components';
+
 
 export default function WalletImport() {
   const { walletStore } = useWalletStore();
@@ -16,25 +18,27 @@ export default function WalletImport() {
         walletStore.receiveState({mnemonic: mn, publicKey:wallet.address});
   }
   return useObserver(()=>
-    <View style={styles.container}>
-      <Mnemonic onAddWallet={onAddWalletPressed}></Mnemonic>
-    </View>
+  <React.Fragment>
+  <View style={styles.details}>
+    <Text style={styles.title} category='h6'>UI Kitten</Text>
+    <Mnemonic onAddWallet={onAddWalletPressed}></Mnemonic>
+  </View>
+  <Divider/>
+  <Button style={styles.installButton}>INSTALL</Button>
+</React.Fragment>
+      
   );
 }
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  details: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    marginVertical: 4,
   },
   title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    marginHorizontal: 8,
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  installButton: {
+    marginVertical: 4,
   },
 });
