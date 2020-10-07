@@ -7,8 +7,8 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import Home from '../screens/Home';
+import TabTwoScreen from '../screens/WalletImport';
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
@@ -34,6 +34,20 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <Entypo name="wallet" size={24}  color={color} />,
         }}
       />
+      <BottomTab.Screen
+        name="Send"
+        component={TabTwoNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <Entypo name="wallet" size={24}  color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Receive"
+        component={TabTwoNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <Entypo name="wallet" size={24}  color={color} />,
+        }}
+      />
     </BottomTab.Navigator>
   );
 }
@@ -52,8 +66,8 @@ function TabOneNavigator() {
   return (
     <TabOneStack.Navigator>
       <TabOneStack.Screen
-        name="TabOneScreen"
-        component={TabOneScreen}
+        name="Home"
+        component={Home}
         options={{ headerTitle: 'Home wallet' }}
       />
     </TabOneStack.Navigator>
