@@ -19,26 +19,14 @@ export default function WalletImport() {
   }
   return useObserver(()=>
   <React.Fragment>
-  <View style={styles.details}>
-    <Text style={styles.title} category='h6'>UI Kitten</Text>
-    <Mnemonic onAddWallet={onAddWalletPressed}></Mnemonic>
+  <View>
+    <Mnemonic onImportMnemonic={onAddWalletPressed} onImportPrivateKey={onAddWalletPressed}></Mnemonic>
   </View>
   <Divider/>
-  <Button style={styles.installButton}>INSTALL</Button>
 </React.Fragment>
       
   );
 }
 const styles = StyleSheet.create({
-  details: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 4,
-  },
-  title: {
-    marginHorizontal: 8,
-  },
-  installButton: {
-    marginVertical: 4,
-  },
+ 
 });

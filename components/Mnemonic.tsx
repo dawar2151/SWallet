@@ -1,59 +1,87 @@
 import React from 'react';
-import { Alert, Button, TextInput, Text, View, StyleSheet } from 'react-native';
-
-import { ethers } from "ethers";
+import {  StyleSheet, View } from 'react-native';
+import { Divider, Input, Button, Icon, Radio, RadioGroup, Text } from '@ui-kitten/components';
 
 interface Props {
-  onAddWallet: (mn: string) => void;
+  onImportMnemonic: (mn: string) => void;
+  onImportPrivateKey: (mn: string) => void;
 }
  
 const Mnemonic : React.FC<Props> = ({
-  onAddWallet,
+  onImportMnemonic,
+  onImportPrivateKey
 }): JSX.Element => {
-  const [value, onChangeText] = React.useState('');
-  const importM = ()=>{
-    const mnemonic = value.trim();
-    if (mnemonic !== '') {
-      onAddWallet(mnemonic);
-      onChangeText('');
-  }
-    //let wallet = ethers.Wallet.fromMnemonic(value);
-    //Alert.alert(wallet.address);
+  const [mnemonic, onChangeMnemonic] = React.useState('');
+  const [privateKey, onChangePrivateKey] = React.useState('');
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+
+  const importMnemonic = ()=>{
+    if (mnemonic.trim() !== '') {
+      onImportMnemonic(mnemonic.trim());
+      onChangeMnemonic('');
+    }
   } 
+  const importPrivateKey = ()=>{
+    if (privateKey.trim() !== '') {
+      onImportPrivateKey(mnemonic.trim());
+      onChangePrivateKey('');
+    }
+  }  
+  const StarIcon = (props:any) => (
+    <Icon {...props} name='star'/>
+  );
+  let view;
+    if (selectedIndex == 0) {
+      view = <View style={styles.bottom}>
+      <Input 
+        onChangeText={text => onChangePrivateKey(text)}
+        placeholder='Private key'
+        value={privateKey}
+      />
+      <Divider/>
+      <Button status='primary' onPress={() =>importPrivateKey()}>
+          Import Private Key
+      </Button> 
+    </View>;
+    } else {
+      view =  <View style={styles.middle}>
+      <Input 
+        onChangeText={text => onChangeMnemonic(text)}
+        placeholder='Menemonic'
+        value={mnemonic}
+      />
+      <Divider/>
+      <Button status='primary' onPress={() =>importMnemonic()}>
+          Import Mnemonic
+      </Button> 
+    </View>;
+    }
   return (
-    <View style={styles.inputContainer}>
-      <TextInput style={styles.input}
-      onChangeText={text => onChangeText(text)}
-      value={value}
-    />
-    <Button
-        title="import"
-        onPress={() =>importM()}
-    />    
-    </View>
-  )
-}
+    <View style={styles.container}>
+      <View style={styles.middle}>
+      <Text  category='p1'>Import wallet using mnemonic or private key</Text>
+      <RadioGroup
+          selectedIndex={selectedIndex}
+          onChange={index => setSelectedIndex(index)}>
+          <Radio>Mnemonic </Radio>
+          <Radio>Private Key</Radio>
+        </RadioGroup>
+      </View>
+      {view}
+  </View>
+  );
+} 
 const styles = StyleSheet.create({
-  inputContainer: {
-      flexDirection: 'row',
-      padding: 16,
-      justifyContent: 'center',
-      alignContent: 'center',
-      alignItems: 'center',
+  container: {
+   margin:20
   },
-  input: {
-      flex: 1,
-      borderColor: 'lightgray',
-      borderRadius: 10,
-      padding: 8,
-      borderWidth: 1,
-      fontSize: 22,
+  top: {
+    
   },
-  buttonContainer: {
-      marginLeft: 16,
+  middle: {
   },
-  buttonText: {
-      fontSize: 32,
+  bottom: {
+    
   },
 });
 export default Mnemonic;

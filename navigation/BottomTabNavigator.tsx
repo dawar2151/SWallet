@@ -8,7 +8,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import Home from '../screens/Home';
-import TabTwoScreen from '../screens/WalletImport';
+import WalletImport from '../screens/WalletImport';
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
@@ -81,7 +81,7 @@ function TabTwoNavigator() {
     <TabTwoStack.Navigator>
       <TabTwoStack.Screen
         name="TabTwoScreen"
-        component={TabTwoScreen}
+        component={WalletImport}
         options={{ headerTitle: 'Import Wallet' }}
       />
     </TabTwoStack.Navigator>
